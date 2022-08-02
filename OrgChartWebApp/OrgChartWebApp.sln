@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.32630.194
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrgChartWebApp", "OrgChartWebApp\OrgChartWebApp.csproj", "{154058CD-C1D0-45C8-BC3A-0C90CA191DB9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{154058CD-C1D0-45C8-BC3A-0C90CA191DB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{154058CD-C1D0-45C8-BC3A-0C90CA191DB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{154058CD-C1D0-45C8-BC3A-0C90CA191DB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{154058CD-C1D0-45C8-BC3A-0C90CA191DB9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {96F9A5C4-FACD-4777-B5C3-585AF59C8658}
+	EndGlobalSection
+EndGlobal
