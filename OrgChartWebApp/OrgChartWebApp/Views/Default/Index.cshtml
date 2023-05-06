@@ -9,7 +9,6 @@
     <meta name="viewport" content="width=device-width" />
     <title>OrgChart</title>
     <script src="https://balkangraph.com/js/orgchart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 
     <style>
         html, body {
@@ -56,10 +55,15 @@
 
         chart.onUpdateNode((args) => {
             let newNode = args.newData;
-            $.post("@Url.Action("UpdateNode")", newNode)
-                .done(function () {
-                    chart.updateNode(newNode);
-                });
+            fetch("@Url.Action("UpdateNode")", {
+                method: "POST",
+                body: JSON.stringify(newNode),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(chart.updateNode(newNode))
+            .catch(error => console.error(error));
             return false;
         });
 
@@ -71,27 +75,44 @@
             node.fullName = "John Smith";
             node.tags = "new";
 
-            $.post("@Url.Action("AddNode")", node)
-                .done(function (response) {
-                    node.id = response.id;
-                    chart.addNode(node);
-                })
-
+            fetch("@Url.Action("AddNode")", {
+                method: "POST",
+                body: JSON.stringify(node),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                node.id = data.id;
+                chart.addNode(node);
+            })
+            .catch(error => console.error(error));
             return false;
         });
 
         chart.onRemoveNode((args) => {
             let nodeId = args.id
-            $.post("@Url.Action("RemoveNode")", { id: nodeId })
-                .done(function () {
-                    chart.removeNode(nodeId);
-                })
+
+            fetch("@Url.Action("RemoveNode")", {
+                method: "POST",
+                body: JSON.stringify({ id: nodeId }),
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+            .then(chart.removeNode(nodeId))
+            .catch(error => console.error(error));
             return true;
         });
 
-        $.get("@Url.Action("Read")").done(function (response) {
-            chart.load(response.nodes);
-        });
+       fetch("@Url.Action("Read")")
+           .then(response => response.json())
+           .then(data => {
+               chart.load(data.nodes);
+           })
+           .catch(error => console.error(error));
+
     </script>
 </body>
 </html>
