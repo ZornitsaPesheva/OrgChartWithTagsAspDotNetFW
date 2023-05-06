@@ -36,7 +36,7 @@
 
     <script>
         OrgChart.STRING_TAGS = true;
-        var chart = new OrgChart(document.getElementById("tree"), {
+        let chart = new OrgChart(document.getElementById("tree"), {
             enableDragDrop: true,
             nodeMenu: {
                 edit: { text: "Edit" },
@@ -47,39 +47,44 @@
                 field_0: "fullName"
             },
             tags: {
-                "new node": {
+                "new": {
                     template: "ula"
                 }
             }
         });
 
-        chart.on('update', function (sender, oldNode, newNode) {
+
+        chart.onUpdateNode((args) => {
+            let newNode = args.newData;
             $.post("@Url.Action("UpdateNode")", newNode)
                 .done(function () {
-                    sender.updateNode(newNode);
+                    chart.updateNode(newNode);
                 });
             return false;
         });
 
-        chart.on('add', function (sender, node) {
+
+        chart.onAddNode((args) => {
+            let node = args.data;
             node.id = 0;
             node.pid = parseInt(node.pid);
             node.fullName = "John Smith";
-            node.tags = "new node";
+            node.tags = "new";
 
             $.post("@Url.Action("AddNode")", node)
                 .done(function (response) {
                     node.id = response.id;
-                    sender.addNode(node);
+                    chart.addNode(node);
                 })
 
             return false;
         });
 
-        chart.on('remove', function (sender, nodeId) {
+        chart.onRemoveNode((args) => {
+            let nodeId = args.id
             $.post("@Url.Action("RemoveNode")", { id: nodeId })
                 .done(function () {
-                    sender.removeNode(nodeId);
+                    chart.removeNode(nodeId);
                 })
             return true;
         });
