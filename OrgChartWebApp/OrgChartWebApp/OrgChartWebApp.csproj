@@ -111,7 +111,6 @@
       <LastGenOutput>OrgChartModel.cs</LastGenOutput>
     </Content>
     <Content Include="Global.asax" />
-    <Content Include="scripts\orgchart.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
